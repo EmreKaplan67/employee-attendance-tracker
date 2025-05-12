@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'sign_in_app/styles.css' %}" />
+    <title>Meaghers Employee Tracking System</title>
+  </head>
+  <body>
+    <div id="notification-banner" class="notification hidden">
+      <span id="notification-message"></span>
+      <button id="close-notification" class="close-btn">&times;</button>
+    </div>
+    <main class="main">
+      <form action="{% url 'index' %}" method="POST">
+        {% csrf_token %}
+        <p class="date"></p>
+        <h1 class="time"></h1>
+        <div class="buttons">
+          <button class="signIn">IN</button>
+          <button class="signOut">OUT</button>
+        </div>
+        <div class="modal-overlay" id="modalOverlay">
+          <div class="modal" tabindex="-1">
+            <button class="close-btn" id="closeModal" aria-label="Close modal">
+              &times;
+            </button>
+            <div class="modalGrid">
+              <div class="numPadDiv">
+                <input
+                  type="text"
+                  id="display"
+                  max-length="4"
+                  name="userCode"
+                  readonly
+                />
+                <div class="numPad">
+                  <button class="numPadButton num" value="1">1</button>
+                  <button class="numPadButton num" value="2">2</button>
+                  <button class="numPadButton num" value="3">3</button>
+                  <button class="numPadButton num" value="4">4</button>
+                  <button class="numPadButton num" value="5">5</button>
+                  <button class="numPadButton num" value="6">6</button>
+                  <button class="numPadButton num" value="7">7</button>
+                  <button class="numPadButton num" value="8">8</button>
+                  <button class="numPadButton num" value="9">9</button>
+                  <button class="numPadButton" value="clear">C</button>
+                  <button class="numPadButton num" value="0">0</button>
+                  <button class="numPadButton" value="erase">←</button>
+                  <br /><br />
+                </div>
+              </div>
+              <div class="camera">
+                <video id="video" autoplay></video>
+                <canvas id="canvas" style="display: none"></canvas>
+              </div>
+              <div class="buttonSection">
+                <div class="signInButtons">
+                  <input
+                    type="submit"
+                    class="startShift"
+                    name="action"
+                    value="Start Shift"
+                    disabled
+                  />
+                  <input
+                    type="submit"
+                    class="finishBreak"
+                    name="action"
+                    value="Finish Break"
+                    disabled
+                  />
+                </div>
+                <div class="signOutButtons">
+                  <input
+                    type="submit"
+                    class="finishShift"
+                    name="action"
+                    value="Finish Shift"
+                    disabled
+                  />
+                  <input
+                    type="submit"
+                    class="startBreak"
+                    name="action"
+                    value="Start Break"
+                    disabled
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </main>
+    <script src="{% static 'sign_in_app/index.js' %}"></script>
+  </body>
+</html>

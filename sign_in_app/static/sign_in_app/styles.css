@@ -1,0 +1,301 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    font-family: sans-serif;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.main {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #002147;
+    background-image: linear-gradient(315deg, #002147 0%, #3b3c36 74%);
+}
+
+form {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.time {
+    font-size: 22vw;
+    margin: auto;
+    color: rgb(249, 246, 238);
+}
+
+.buttons {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.signIn, .signOut {
+    align-items: center;
+    background-clip: padding-box;
+    background-color: #fa6400;
+    border: 1px solid transparent;
+    border-radius: .5rem;
+    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 2.3rem;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 1.25;
+    margin: 1rem;
+    min-height: 3rem;
+    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+    width: 8em;
+    min-width: fit-content;
+}
+
+.signIn:hover, .signOut:hover,
+.signIn:focus, .signOut:focus {
+    background-color: #fb8332;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.signIn:active, .signOut:active {
+    background-color: #c85000;
+    box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+    transform: translateY(0);
+}
+
+.date {
+    font-size: 1.5rem;
+    color: white;
+    align-self: left;
+}
+
+/* Sign In Page Logic*/
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 10, 10, 0.6);
+    backdrop-filter: blur(6px);
+    display: grid;
+    place-items: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 999;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal {
+    background: #fff;
+    padding: 2rem;
+    width: 55%;
+    height: 85%;
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+    transform: translateY(30px) scale(0.95);
+    opacity: 0;
+    transition: all 0.35s ease;
+}
+
+.modal-overlay.active .modal {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+.close-btn {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    background: transparent;
+    font-size: 1.6rem;
+    color: #555;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: #111;
+}
+
+.modal div:hover {
+    cursor: pointer;
+}
+
+/*numPad*/
+.numPadDiv {
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    object-fit: contain;
+}
+
+#display {
+    width: 100%;
+    font-size: 2rem;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 15px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background: #eef2f7;
+}
+
+.numPad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.numPadButton {
+    font-size: 1.5rem;
+    padding: 20px;
+    border: none;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.numPadButton:hover {
+    background-color: #e0e0e0;
+}
+
+/* Modal Grid*/
+.numPadDiv {
+    grid-area: numPadDiv;
+}
+
+.camera {
+    grid-area: camera;
+}
+
+.buttonSection {
+    grid-area: buttonSection;
+}
+
+.modalGrid {
+    z-index: 1000;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50%;
+    grid-template-areas:
+        "numPadDiv camera"
+        "numPadDiv buttonSection"
+    ;
+
+}
+
+/* Camera Style */
+canvas, video {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-top: 20px;
+    width: 100%;
+    height: auto;
+}
+
+/* Last Buttons */
+.startShift, .finishShift, .startBreak, .finishBreak {
+    align-items: center;
+    background-clip: padding-box;
+    background-color: #fa6400;
+    border: 1px solid transparent;
+    border-radius: .5rem;
+    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+    color: #fff;
+    cursor: pointer;
+    font-size: 2rem;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 1.25;
+    min-height: 3rem;
+    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+    width: 100%;
+    min-width: fit-content;
+    margin: 5px auto;
+}
+
+.startShift:hover, .finishShift:hover, .startBreak:hover, .finishBreak:hover,
+.startShift:focus, .finishShift:focus, .startBreak:focus, .finishBreak:focus {
+    background-color: #fb8332;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.startShift:active, .finishShift:active, .startBreak:active, .finishBreak:active {
+    background-color: #c85000;
+    box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+    transform: translateY(0);
+}
+
+input[disabled] {
+    background-color: #f0f0f0;
+    color: #999;
+    box-shadow: none;
+}
+
+input[disabled]:hover, input[disabled]:active, input[disabled]:focus {
+    background-color: #f0f0f0;
+    color: #999;
+    box-shadow: none;
+}
+
+
+/* Notification base styles */
+.notification {
+    position: fixed;
+    top: -100px;
+    /* Hidden initially */
+    left: 0;
+    width: 100%;
+    padding: 15px;
+    background-color: #f44336;
+    /* Red for error */
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    z-index: 1000;
+    transition: top 0.5s ease, opacity 0.5s ease;
+}
+
+/* Slide-in animation */
+.notification.show {
+    top: 0;
+}
+
+/* Optional fade-out */
+.notification.fade-out {
+    opacity: 0;
+}
+
+#close-notification {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    line-height: 1;
+}
